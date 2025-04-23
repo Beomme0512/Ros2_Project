@@ -1,0 +1,39 @@
+direction: right
+
+Robot {
+    Keyboard
+    Terminal
+}
+
+ROS2Nodes {
+  Input_Process {
+    DirecterNode
+  }
+  
+  Timer {
+    TimerNode
+  }
+
+
+  Output_Process {
+    Tx_Node
+  }
+
+  System {
+    DebugMonitor
+    UIInterface
+  }
+}
+
+#message flow
+Robot.Keyboard -> Input_Process.DirecterNode : Direction
+
+Timer.TimerNode -> Output_Process.Tx_Node : Timer_Cnt
+Input_Process.DirecterNode -> Output_Process.Tx_Node : Check_Dir
+
+Output_Process.Tx_Node -> Robot.Terminal : 
+
+
+#Display
+#System.UIInterface -> PlanningNodes.GameStateManager
+System.DebugMonitor -> All

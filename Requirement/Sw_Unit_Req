@@ -1,0 +1,38 @@
+NodeName : MotionCtrl
+
+Publisher:
+    Topic Name: cmd_vel
+    Message Type: Twist
+    Message Format: linear.x , angular.z
+
+Subscriber: 
+    Topic Name: Schedule
+    Message Type: Boolean
+    Message Used Fields: Time_10ms
+
+Topic Name : Direction
+    Message Type: String
+    Message Used Fields: ‘Up’, ‘Down’, ’Right’, ‘Left’
+
+Node Requirement: 
+ 
+    노드기능 : “Scheduler”메시지의 ‘Time_10ms’가 활성화시, “Direation” 메시지의 방향 정보에 따라 ‘linear.x’와 ’angular.z’의 값을 업데이트 하여 ‘cmd_vel’ 메시지를 Publishing 한다.
+ 
+    상세사양 
+        Function_01
+           - Input : Time_10ms
+           - Output : -
+           - Detail : ‘Time_10ms’ 메시지에 따라 해당 노드를 활성화 시킨다.
+        Function_02
+           - Input : Direction 메시지
+           - Output : linear.x, angular.z
+           - Detail : 
+             초기값 설정 : linear.x = 0, angular.z =0
+             “Up”의 경우, angular.z += 0.1
+             “Down”의 경우, angular.z -= 0.1
+             “Right”의 경우, linear.x +=0.1
+             “Left”의 경우, linear.x -= 0.1
+             결과 값을  Topic Name ”cmd_vel”인 메세지를 통해 Publishing한다.
+    수행주기 : Timer_5ms신호 True시 노드 활성화 
+    
+    설계 언어 : Cpp 

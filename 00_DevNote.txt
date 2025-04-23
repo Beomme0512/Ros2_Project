@@ -1,0 +1,66 @@
+# docker container 진입 방법
+# docker 실행
+# 터미널 : docker ps (실행중인 컨테이너 ID 확인 가능)
+# 터미널 : docker exec - it  XXXXXXX(ID) bash 
+# source /opt/ros/humble/setup.bash
+# 초기 Docker 진입후 필수 수행 항목 : source ~/ros2_ws/install/setup.bash 
+
+# 빌드시 수행항목
+cd ~/ros2_ws
+colcon build 
+ * 특정 패키지 빌드시 colcon build --packages-select control
+source install/setup.bash  ← 꼭 필요!
+ros2 run my_pkg my_node(프로젝트명)
+
+#
+source /opt/ros/humble/setup.bash   # ROS2 자체 환경 설정
+source ~/ros2_ws/install/setup.bash # 내 패키지 환경 설정
+
+#docker에서 폴더 생성 방법
+cd 해당 폴더로 이동
+ls 구성 내용 확인
+mkdir 폴더 생성
+
+####0406 Note###
+왜 cmakelists를 쓰는거지?
+ - Cmake란 프로젝트를 빌드하기위한 스트립트 기반도구.
+ - 빌드에 필요한 명령 모음집이라고 이해하면 됨. 만약 없다면 매번 필요한 명령을 기입해야함.
+ - 즉, 여기에 모든 명령을 모아두고, 빌드할때 하면에 호출하여 명령을 수행함.
+
+왜 따로 msg파일을 만들어야 하는걸까?
+ - 꼭 만들필요는 없지만, 관리적인 측면으로 정의하는게 좋음.
+ - 노드간 통신에서도 정의된 메세지만 사용한다고하면, 아키텍쳐 이해도 좋음.
+ 
+발행 노드와 토픽을 잡아두고 있으면, 아키텍쳐간 흐름파악이 좋음.
+
+
+###0413 예시 코드 분석
+
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
+class Talker : public rclcpp::Node {
+public:
+  Talker() : Node("talker") {
+    publisher_ = this->create_publisher<std_msgs::msg::String>("chase_topic", 10);
+    timer_ = this->create_wall_timer(
+      std::chrono::milliseconds(500),
+      [this]() {
+        auto msg = std_msgs::msg::String();
+        msg.data = "I am chasing you!";
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", msg.data.c_str());
+        publisher_->publish(msg);
+      });
+  }
+
+private:                            
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+  rclcpp::TimerBase::SharedPtr timer_;
+};
+
+int main(int argc, char * argv[]) {
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared<Talker>());
+  rclcpp::shutdown();
+  return 0;
+}
