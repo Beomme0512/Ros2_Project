@@ -3,15 +3,19 @@
 # 터미널 : docker ps (실행중인 컨테이너 ID 확인 가능)
 # 터미널 : docker exec - it  XXXXXXX(ID) bash 
 # source /opt/ros/humble/setup.bash
-# 초기 Docker 진입후 필수 수행 항목 : source ~/ros2_ws/install/setup.bash 
+# 초기 Docker 진입후 필수 수행 항목 : 
+  source ~/ros2_ws/install/setup.bash 
+  source /opt/ros/humble/setup.bash
+
 
 # 빌드시 수행항목
+
 cd ~/ros2_ws
 colcon build 
  * 특정 패키지 빌드시 colcon build --packages-select control
 source install/setup.bash  ← 꼭 필요!
 ros2 run my_pkg my_node(프로젝트명)
-
+rm -rf build install log # 빌드 초기화
 #
 source /opt/ros/humble/setup.bash   # ROS2 자체 환경 설정
 source ~/ros2_ws/install/setup.bash # 내 패키지 환경 설정
