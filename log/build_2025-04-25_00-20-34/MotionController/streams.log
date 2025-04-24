@@ -1,0 +1,41 @@
+[0.018s] Invoking command in '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/MotionController': SHLVL=2 _=/usr/bin/env /opt/homebrew/bin/cmake /Users/shinbeomcheol/Documents/GitHub/ros2_ws/src/MotionController -DCMAKE_INSTALL_PREFIX=/Users/shinbeomcheol/Documents/GitHub/ros2_ws/install/MotionController
+[0.319s] CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.319s]   Compatibility with CMake < 3.10 will be removed from a future version of
+[0.319s]   CMake.
+[0.319s] 
+[0.319s]   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+[0.319s]   to tell CMake that the project requires at least <min> but has been updated
+[0.319s]   to work with policies introduced by <max> or earlier.
+[0.319s] 
+[0.319s] 
+[2.057s] -- The C compiler identification is AppleClang 17.0.0.17000013
+[2.146s] -- The CXX compiler identification is AppleClang 17.0.0.17000013
+[2.191s] -- Detecting C compiler ABI info
+[2.532s] -- Detecting C compiler ABI info - done
+[2.549s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.550s] -- Detecting C compile features
+[2.550s] -- Detecting C compile features - done
+[2.557s] -- Detecting CXX compiler ABI info
+[2.738s] -- Detecting CXX compiler ABI info - done
+[2.753s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.754s] -- Detecting CXX compile features
+[2.754s] -- Detecting CXX compile features - done
+[2.837s] CMake Error at CMakeLists.txt:8 (find_package):
+[2.837s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[2.837s]   has asked CMake to find a package configuration file provided by
+[2.837s]   "ament_cmake", but CMake did not find one.
+[2.838s] 
+[2.839s]   Could not find a package configuration file provided by "ament_cmake" with
+[2.839s]   any of the following names:
+[2.839s] 
+[2.839s]     ament_cmakeConfig.cmake
+[2.839s]     ament_cmake-config.cmake
+[2.840s] 
+[2.840s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[2.840s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[2.840s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[2.841s]   has been installed.
+[2.842s] 
+[2.842s] 
+[2.842s] -- Configuring incomplete, errors occurred!
+[2.843s] Invoked command in '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/MotionController' returned '1': SHLVL=2 _=/usr/bin/env /opt/homebrew/bin/cmake /Users/shinbeomcheol/Documents/GitHub/ros2_ws/src/MotionController -DCMAKE_INSTALL_PREFIX=/Users/shinbeomcheol/Documents/GitHub/ros2_ws/install/MotionController

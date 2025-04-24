@@ -1,0 +1,29 @@
+[0.017s] Invoking command in '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/Rx_Process': SHLVL=2 _=/usr/bin/env /opt/homebrew/bin/cmake /Users/shinbeomcheol/Documents/GitHub/ros2_ws/src/Rx_Process -DCMAKE_INSTALL_PREFIX=/Users/shinbeomcheol/Documents/GitHub/ros2_ws/install/Rx_Process
+[0.039s] CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.039s]   Compatibility with CMake < 3.10 will be removed from a future version of
+[0.039s]   CMake.
+[0.039s] 
+[0.039s]   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+[0.039s]   to tell CMake that the project requires at least <min> but has been updated
+[0.039s]   to work with policies introduced by <max> or earlier.
+[0.039s] 
+[0.039s] 
+[0.166s] CMake Error at CMakeLists.txt:8 (find_package):
+[0.166s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[0.166s]   has asked CMake to find a package configuration file provided by
+[0.166s]   "ament_cmake", but CMake did not find one.
+[0.166s] 
+[0.166s]   Could not find a package configuration file provided by "ament_cmake" with
+[0.167s]   any of the following names:
+[0.167s] 
+[0.167s]     ament_cmakeConfig.cmake
+[0.167s]     ament_cmake-config.cmake
+[0.167s] 
+[0.168s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[0.169s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[0.169s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[0.170s]   has been installed.
+[0.170s] 
+[0.171s] 
+[0.172s] -- Configuring incomplete, errors occurred!
+[0.175s] Invoked command in '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/Rx_Process' returned '1': SHLVL=2 _=/usr/bin/env /opt/homebrew/bin/cmake /Users/shinbeomcheol/Documents/GitHub/ros2_ws/src/Rx_Process -DCMAKE_INSTALL_PREFIX=/Users/shinbeomcheol/Documents/GitHub/ros2_ws/install/Rx_Process

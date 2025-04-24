@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>MotionController</name>
+  <version>0.0.1</version>
+  <description>Motion controller node using direction and time cycle inputs.</description>
+
+  <maintainer email="your_email@example.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

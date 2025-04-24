@@ -1,4 +1,75 @@
-NodeName : MotionCtrl
+------Start of Requirement------
+
+NodeName : SchedulerNode
+
+Publisher:
+    Topic Name: TimeCycle
+    Message Type: Boolean
+    Message Format: Cyc5ms_b , Cyc10ms_b
+
+Subscriber: 
+    Topic Name: -
+    Message Type: -
+    Message Used Fields: -
+
+Node Requirement: 
+ 
+    노드기능 : 5ms 주기로 Timer 생성, 10ms 주기로 Timer를 생성하여, 각 Timer의 신호를 Publishing 한다.
+ 
+    상세사양 
+        Function_01
+           - Input : -
+           - Output : Cyc5ms_b
+           - Detail : 5ms 주기로 Timer를 생성하여 Cyc5ms_b를 Publishing 한다.
+        Function_02
+           - Input : -
+           - Output : Cyc10ms_b
+           - Detail : 10ms 주기로 Timer를 생성하여 Cyc10ms_b를 Publishing 한다.
+
+    수행주기 : -
+    
+    설계 언어 : Cpp 
+
+------End of Requirement------
+
+
+
+------Start of Requirement------
+
+NodeName : DirectionNode (Package :Rx_Process)
+
+Publisher:
+    Topic Name: Direction
+    Message Type: String
+    Message Format: ‘Up’, ‘Down’, ’Right’, ‘Left’
+
+Subscriber: 
+    Topic Name: TimeCycle
+    Message Type: Boolean
+    Message Used Fields: Cyc10ms_b
+
+Node Requirement: 
+ 
+    노드기능 : Cyc10ms_b가 활성화시, 키보드의 방향에 따라 ‘Up’, ‘Down’, ’Right’, ‘Left’ 중 하나의 방향을 Publishing 한다.
+ 
+    상세사양 
+        Function_01
+           - Input : 키보드의 방향키
+           - Output : ‘Up’, ‘Down’, ’Right’, ‘Left’
+           - Detail : 키보드의 방향키에 따라 ‘Up’, ‘Down’, ’Right’, ‘Left’ 중 하나의 방향을 Publishing 한다.
+           
+    수행주기 : Cyc10ms_b 신호 True시 노드 활성화
+    
+    설계 언어 : Cpp 
+
+------End of Requirement------
+
+
+
+
+------Start of Requirement------
+
+NodeName : MotionCtrlNode (Package:MotionContoller)
 
 Publisher:
     Topic Name: cmd_vel
@@ -6,23 +77,25 @@ Publisher:
     Message Format: linear.x , angular.z
 
 Subscriber: 
-    Topic Name: Schedule
+    Topic Name: TimeCycle
     Message Type: Boolean
-    Message Used Fields: Time_10ms
+    Message Used Fields: Cyc5ms_b
 
-Topic Name : Direction
+    Topic Name : Direction
     Message Type: String
     Message Used Fields: ‘Up’, ‘Down’, ’Right’, ‘Left’
 
 Node Requirement: 
  
-    노드기능 : “Scheduler”메시지의 ‘Time_10ms’가 활성화시, “Direation” 메시지의 방향 정보에 따라 ‘linear.x’와 ’angular.z’의 값을 업데이트 하여 ‘cmd_vel’ 메시지를 Publishing 한다.
+    노드기능 : “TimeCycle”메시지의 ‘Cyc5ms_b’가 활성화시, “Direation” 메시지의 방향 정보에 따라 ‘linear.x’와 ’angular.z’의 값을 업데이트 하여 ‘cmd_vel’ 메시지를 Publishing 한다.
  
     상세사양 
+
         Function_01
-           - Input : Time_10ms
+           - Input : Cyc5ms_b 메시지
            - Output : -
-           - Detail : ‘Time_10ms’ 메시지에 따라 해당 노드를 활성화 시킨다.
+           - Detail : Cyc5ms_b 메시지에 따라 해당 노드를 활성화 시킨다.
+    
         Function_02
            - Input : Direction 메시지
            - Output : linear.x, angular.z
@@ -32,7 +105,15 @@ Node Requirement:
              “Down”의 경우, angular.z -= 0.1
              “Right”의 경우, linear.x +=0.1
              “Left”의 경우, linear.x -= 0.1
+             만약, ’Right’ 가 3초 이상 지속 인가시, linear.x += 0.3
+                또는 ’Left’ 가 3초 이상 지속 인가시, linear.x -= 0.3
              결과 값을  Topic Name ”cmd_vel”인 메세지를 통해 Publishing한다.
+
     수행주기 : Timer_5ms신호 True시 노드 활성화 
     
     설계 언어 : Cpp 
+
+------End of Requirement------
+
+
+

@@ -1,0 +1,103 @@
+[0.000000] (-) TimerEvent: {}
+[0.000144] (MotionController) JobQueued: {'identifier': 'MotionController', 'dependencies': OrderedDict()}
+[0.000201] (Rx_Process) JobQueued: {'identifier': 'Rx_Process', 'dependencies': OrderedDict()}
+[0.000283] (Time_Scheuler) JobQueued: {'identifier': 'Time_Scheuler', 'dependencies': OrderedDict()}
+[0.000329] (MotionController) JobStarted: {'identifier': 'MotionController'}
+[0.006279] (Rx_Process) JobStarted: {'identifier': 'Rx_Process'}
+[0.009620] (Time_Scheuler) JobStarted: {'identifier': 'Time_Scheuler'}
+[0.015094] (MotionController) JobProgress: {'identifier': 'MotionController', 'progress': 'cmake'}
+[0.015889] (MotionController) Command: {'cmd': ['/opt/homebrew/bin/cmake', '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/src/MotionController', '-DCMAKE_INSTALL_PREFIX=/Users/shinbeomcheol/Documents/GitHub/ros2_ws/install/MotionController'], 'cwd': '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/MotionController', 'env': OrderedDict([('TERM_PROGRAM', 'vscode'), ('TERM', 'xterm-256color'), ('SHELL', '/bin/zsh'), ('HOMEBREW_REPOSITORY', '/opt/homebrew'), ('TMPDIR', '/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/'), ('TERM_PROGRAM_VERSION', '1.99.3'), ('ZDOTDIR', '/Users/shinbeomcheol'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'undefined'), ('MallocNanoZone', '0'), ('USER', 'shinbeomcheol'), ('COMMAND_MODE', 'unix2003'), ('SSH_AUTH_SOCK', '/private/tmp/com.apple.launchd.KKf1pv7RaD/Listeners'), ('VSCODE_PROFILE_INITIALIZED', '1'), ('__CF_USER_TEXT_ENCODING', '0x1F5:0x3:0x33'), ('PYDEVD_DISABLE_FILE_VALIDATION', '1'), ('PATH', '/Users/shinbeomcheol/Library/Python/3.9/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/scripts/noConfigScripts:/Users/shinbeomcheol/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand'), ('USER_ZDOTDIR', '/Users/shinbeomcheol'), ('__CFBundleIdentifier', 'com.microsoft.VSCode'), ('PWD', '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/MotionController'), ('COLCON', '1'), ('LANG', 'en_US.UTF-8'), ('BUNDLED_DEBUGPY_PATH', '/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/libs/debugpy'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('XPC_FLAGS', '0x0'), ('XPC_SERVICE_NAME', '0'), ('VSCODE_INJECTION', '1'), ('VSCODE_DEBUGPY_ADAPTER_ENDPOINTS', '/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/.noConfigDebugAdapterEndpoints/endpoint-44fdf5f218f69982.txt'), ('SHLVL', '2'), ('HOME', '/Users/shinbeomcheol'), ('VSCODE_GIT_ASKPASS_MAIN', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js'), ('HOMEBREW_PREFIX', '/opt/homebrew'), ('LOGNAME', 'shinbeomcheol'), ('VSCODE_GIT_IPC_HANDLE', '/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/vscode-git-334243c7d5.sock'), ('VSCODE_GIT_ASKPASS_NODE', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)'), ('GIT_ASKPASS', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh'), ('INFOPATH', '/opt/homebrew/share/info:/opt/homebrew/share/info:'), ('HOMEBREW_CELLAR', '/opt/homebrew/Cellar'), ('DISPLAY', '/private/tmp/com.apple.launchd.6MEo8aCxCv/org.xquartz:0'), ('COLORTERM', 'truecolor'), ('_', '/usr/bin/env')]), 'shell': False}
+[0.020363] (Rx_Process) JobProgress: {'identifier': 'Rx_Process', 'progress': 'cmake'}
+[0.021115] (Rx_Process) Command: {'cmd': ['/opt/homebrew/bin/cmake', '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/src/Rx_Process', '-DCMAKE_INSTALL_PREFIX=/Users/shinbeomcheol/Documents/GitHub/ros2_ws/install/Rx_Process'], 'cwd': '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/Rx_Process', 'env': OrderedDict([('TERM_PROGRAM', 'vscode'), ('TERM', 'xterm-256color'), ('SHELL', '/bin/zsh'), ('HOMEBREW_REPOSITORY', '/opt/homebrew'), ('TMPDIR', '/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/'), ('TERM_PROGRAM_VERSION', '1.99.3'), ('ZDOTDIR', '/Users/shinbeomcheol'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'undefined'), ('MallocNanoZone', '0'), ('USER', 'shinbeomcheol'), ('COMMAND_MODE', 'unix2003'), ('SSH_AUTH_SOCK', '/private/tmp/com.apple.launchd.KKf1pv7RaD/Listeners'), ('VSCODE_PROFILE_INITIALIZED', '1'), ('__CF_USER_TEXT_ENCODING', '0x1F5:0x3:0x33'), ('PYDEVD_DISABLE_FILE_VALIDATION', '1'), ('PATH', '/Users/shinbeomcheol/Library/Python/3.9/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/scripts/noConfigScripts:/Users/shinbeomcheol/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand'), ('USER_ZDOTDIR', '/Users/shinbeomcheol'), ('__CFBundleIdentifier', 'com.microsoft.VSCode'), ('PWD', '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/Rx_Process'), ('COLCON', '1'), ('LANG', 'en_US.UTF-8'), ('BUNDLED_DEBUGPY_PATH', '/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/libs/debugpy'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('XPC_FLAGS', '0x0'), ('XPC_SERVICE_NAME', '0'), ('VSCODE_INJECTION', '1'), ('VSCODE_DEBUGPY_ADAPTER_ENDPOINTS', '/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/.noConfigDebugAdapterEndpoints/endpoint-44fdf5f218f69982.txt'), ('SHLVL', '2'), ('HOME', '/Users/shinbeomcheol'), ('VSCODE_GIT_ASKPASS_MAIN', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js'), ('HOMEBREW_PREFIX', '/opt/homebrew'), ('LOGNAME', 'shinbeomcheol'), ('VSCODE_GIT_IPC_HANDLE', '/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/vscode-git-334243c7d5.sock'), ('VSCODE_GIT_ASKPASS_NODE', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)'), ('GIT_ASKPASS', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh'), ('INFOPATH', '/opt/homebrew/share/info:/opt/homebrew/share/info:'), ('HOMEBREW_CELLAR', '/opt/homebrew/Cellar'), ('DISPLAY', '/private/tmp/com.apple.launchd.6MEo8aCxCv/org.xquartz:0'), ('COLORTERM', 'truecolor'), ('_', '/usr/bin/env')]), 'shell': False}
+[0.023511] (Time_Scheuler) JobProgress: {'identifier': 'Time_Scheuler', 'progress': 'cmake'}
+[0.024102] (Time_Scheuler) Command: {'cmd': ['/opt/homebrew/bin/cmake', '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/src/Time_Scheuler', '-DCMAKE_INSTALL_PREFIX=/Users/shinbeomcheol/Documents/GitHub/ros2_ws/install/Time_Scheuler'], 'cwd': '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/Time_Scheuler', 'env': OrderedDict([('TERM_PROGRAM', 'vscode'), ('TERM', 'xterm-256color'), ('SHELL', '/bin/zsh'), ('HOMEBREW_REPOSITORY', '/opt/homebrew'), ('TMPDIR', '/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/'), ('TERM_PROGRAM_VERSION', '1.99.3'), ('ZDOTDIR', '/Users/shinbeomcheol'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'undefined'), ('MallocNanoZone', '0'), ('USER', 'shinbeomcheol'), ('COMMAND_MODE', 'unix2003'), ('SSH_AUTH_SOCK', '/private/tmp/com.apple.launchd.KKf1pv7RaD/Listeners'), ('VSCODE_PROFILE_INITIALIZED', '1'), ('__CF_USER_TEXT_ENCODING', '0x1F5:0x3:0x33'), ('PYDEVD_DISABLE_FILE_VALIDATION', '1'), ('PATH', '/Users/shinbeomcheol/Library/Python/3.9/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/scripts/noConfigScripts:/Users/shinbeomcheol/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand'), ('USER_ZDOTDIR', '/Users/shinbeomcheol'), ('__CFBundleIdentifier', 'com.microsoft.VSCode'), ('PWD', '/Users/shinbeomcheol/Documents/GitHub/ros2_ws/build/Time_Scheuler'), ('COLCON', '1'), ('LANG', 'en_US.UTF-8'), ('BUNDLED_DEBUGPY_PATH', '/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/libs/debugpy'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('XPC_FLAGS', '0x0'), ('XPC_SERVICE_NAME', '0'), ('VSCODE_INJECTION', '1'), ('VSCODE_DEBUGPY_ADAPTER_ENDPOINTS', '/Users/shinbeomcheol/.vscode/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/.noConfigDebugAdapterEndpoints/endpoint-44fdf5f218f69982.txt'), ('SHLVL', '2'), ('HOME', '/Users/shinbeomcheol'), ('VSCODE_GIT_ASKPASS_MAIN', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js'), ('HOMEBREW_PREFIX', '/opt/homebrew'), ('LOGNAME', 'shinbeomcheol'), ('VSCODE_GIT_IPC_HANDLE', '/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/vscode-git-334243c7d5.sock'), ('VSCODE_GIT_ASKPASS_NODE', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)'), ('GIT_ASKPASS', '/private/var/folders/yl/lx84c0zj6cd0qqzqgzrf8k140000gn/T/AppTranslocation/C0CB7724-7392-4BB4-81D8-FA268BDEFDCE/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh'), ('INFOPATH', '/opt/homebrew/share/info:/opt/homebrew/share/info:'), ('HOMEBREW_CELLAR', '/opt/homebrew/Cellar'), ('DISPLAY', '/private/tmp/com.apple.launchd.6MEo8aCxCv/org.xquartz:0'), ('COLORTERM', 'truecolor'), ('_', '/usr/bin/env')]), 'shell': False}
+[0.044316] (MotionController) StderrLine: {'line': b'CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):\n'}
+[0.044509] (MotionController) StderrLine: {'line': b'  Compatibility with CMake < 3.10 will be removed from a future version of\n'}
+[0.044560] (MotionController) StderrLine: {'line': b'  CMake.\n'}
+[0.044605] (MotionController) StderrLine: {'line': b'\n'}
+[0.044648] (MotionController) StderrLine: {'line': b'  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax\n'}
+[0.044688] (MotionController) StderrLine: {'line': b'  to tell CMake that the project requires at least <min> but has been updated\n'}
+[0.044726] (MotionController) StderrLine: {'line': b'  to work with policies introduced by <max> or earlier.\n'}
+[0.044764] (MotionController) StderrLine: {'line': b'\n'}
+[0.044802] (MotionController) StderrLine: {'line': b'\n'}
+[0.044842] (Rx_Process) StderrLine: {'line': b'CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):\n'}
+[0.044972] (Rx_Process) StderrLine: {'line': b'  Compatibility with CMake < 3.10 will be removed from a future version of\n'}
+[0.045026] (Rx_Process) StderrLine: {'line': b'  CMake.\n'}
+[0.045072] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.045116] (Rx_Process) StderrLine: {'line': b'  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax\n'}
+[0.045159] (Rx_Process) StderrLine: {'line': b'  to tell CMake that the project requires at least <min> but has been updated\n'}
+[0.045208] (Rx_Process) StderrLine: {'line': b'  to work with policies introduced by <max> or earlier.\n'}
+[0.045251] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.045293] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.045333] (Time_Scheuler) StderrLine: {'line': b'CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):\n'}
+[0.045432] (Time_Scheuler) StderrLine: {'line': b'  Compatibility with CMake < 3.10 will be removed from a future version of\n'}
+[0.045474] (Time_Scheuler) StderrLine: {'line': b'  CMake.\n'}
+[0.045517] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.045558] (Time_Scheuler) StderrLine: {'line': b'  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax\n'}
+[0.045600] (Time_Scheuler) StderrLine: {'line': b'  to tell CMake that the project requires at least <min> but has been updated\n'}
+[0.045643] (Time_Scheuler) StderrLine: {'line': b'  to work with policies introduced by <max> or earlier.\n'}
+[0.045684] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.045724] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.100390] (-) TimerEvent: {}
+[0.171208] (MotionController) StderrLine: {'line': b'CMake Error at CMakeLists.txt:8 (find_package):\n'}
+[0.171394] (MotionController) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[0.171457] (MotionController) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[0.171507] (MotionController) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[0.171553] (MotionController) StderrLine: {'line': b'\n'}
+[0.171601] (MotionController) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[0.171647] (MotionController) StderrLine: {'line': b'  any of the following names:\n'}
+[0.171693] (MotionController) StderrLine: {'line': b'\n'}
+[0.171904] (MotionController) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[0.171959] (MotionController) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[0.172066] (MotionController) StderrLine: {'line': b'\n'}
+[0.172242] (MotionController) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[0.172293] (MotionController) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[0.172338] (MotionController) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[0.172381] (MotionController) StderrLine: {'line': b'  has been installed.\n'}
+[0.172424] (MotionController) StderrLine: {'line': b'\n'}
+[0.172467] (MotionController) StderrLine: {'line': b'\n'}
+[0.172509] (MotionController) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.172596] (Rx_Process) StderrLine: {'line': b'CMake Error at CMakeLists.txt:8 (find_package):\n'}
+[0.172649] (Rx_Process) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[0.172696] (Rx_Process) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[0.172741] (Rx_Process) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[0.172785] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.172827] (Rx_Process) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[0.172869] (Rx_Process) StderrLine: {'line': b'  any of the following names:\n'}
+[0.173183] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.173361] (Rx_Process) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[0.173471] (Rx_Process) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[0.173806] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.173871] (Rx_Process) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[0.174031] (Rx_Process) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[0.175352] (Rx_Process) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[0.175892] (Rx_Process) StderrLine: {'line': b'  has been installed.\n'}
+[0.176091] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.176209] (Rx_Process) StderrLine: {'line': b'\n'}
+[0.177561] (Rx_Process) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.178113] (Time_Scheuler) StderrLine: {'line': b'CMake Error at CMakeLists.txt:10 (find_package):\n'}
+[0.178234] (Time_Scheuler) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[0.178437] (Time_Scheuler) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[0.178585] (Time_Scheuler) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[0.179764] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.180062] (Time_Scheuler) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[0.180117] (Time_Scheuler) StderrLine: {'line': b'  any of the following names:\n'}
+[0.180166] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.180222] (Time_Scheuler) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[0.180540] (Time_Scheuler) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[0.180600] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.180656] (Time_Scheuler) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[0.180722] (Time_Scheuler) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[0.180776] (Time_Scheuler) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[0.180823] (Time_Scheuler) StderrLine: {'line': b'  has been installed.\n'}
+[0.180878] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.180942] (Time_Scheuler) StderrLine: {'line': b'\n'}
+[0.180995] (Time_Scheuler) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.181189] (Rx_Process) CommandEnded: {'returncode': 1}
+[0.181581] (Time_Scheuler) CommandEnded: {'returncode': 1}
+[0.181736] (MotionController) CommandEnded: {'returncode': 1}
+[0.199336] (Time_Scheuler) JobEnded: {'identifier': 'Time_Scheuler', 'rc': 1}
+[0.200606] (-) TimerEvent: {}
+[0.202564] (Rx_Process) JobEnded: {'identifier': 'Rx_Process', 'rc': 1}
+[0.203059] (MotionController) JobEnded: {'identifier': 'MotionController', 'rc': 'SIGINT'}
+[0.214635] (-) EventReactorShutdown: {}

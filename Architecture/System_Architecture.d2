@@ -2,25 +2,21 @@ direction: right
 
 Robot {
     Keyboard
-    Terminal
+    Gazebo
 }
 
 ROS2Nodes {
-  Input_Process {
-    DirecterNode
+
+  Time_Scheuler {
+    ScheulerNode
+  }
+
+  RX_Process{
+    DirectionNode   
   }
   
-  Timer {
-    TimerNode
-  }
-
   Motioncontroller {
-    MotionNode //시험용 노드
-  }
-
-
-  Output_Process {
-    Tx_Node
+    MotionCtrlNode 
   }
 
   System {
@@ -30,10 +26,13 @@ ROS2Nodes {
 }
 
 #message flow
-Robot.Keyboard -> Input_Process.DirecterNode : Direction
+Robot.Keyboard -> RX_Process.DirectionNode : Key_Pressed
+Time_Scheuler.ScheulerNode -> RX_Process.DirectionNode : TimeCycle.10ms
 
-Timer.TimerNode -> Output_Process.Tx_Node : Timer_Cnt
-Input_Process.DirecterNode -> Output_Process.Tx_Node : Check_Dir
+RX_Process.DirectionNode -> Motioncontroller.MotionCtrlNode : Direction
+Time_Scheuler.ScheulerNode -> Motioncontroller.MotionCtrlNode : TimeCycle.5ms
+
+Motioncontroller.MotionCtrlNode -> Robot.Gazebo : MotionCommand
 
 
 #Display
