@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>Time_Scheuler</name>
+  <name>time_scheuler</name>
   <version>0.0.1</version>
   <description>Time scheduler node that publishes 5ms and 10ms cycles.</description>
 

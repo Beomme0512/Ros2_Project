@@ -4,19 +4,19 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='Time_Scheuler',
+            package='time_scheuler',
             executable='scheduler_node',
             name='scheduler_node',
             output='screen'
         ),
         Node(
-            package='Rx_Process',
+            package='rx_process',
             executable='direction_node',
             name='direction_node',
             output='screen'
         ),
         Node(
-            package='MotionController',
+            package='motioncontroller',
             executable='motion_ctrl_node',
             name='motion_ctrl_node',
             output='screen'

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>my_robot_launcher</name>
+  <version>0.0.1</version>
+  <description>My robot launch package</description>
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+</package>

@@ -9,16 +9,17 @@
 
 
 # 빌드시 수행항목
+  cd ~/ros2_ws
+  colcon build 
+  * 특정 패키지 빌드시 colcon build --packages-select control
+  source install/setup.bash  ← 꼭 필요!
+  ros2 run my_pkg my_node(프로젝트명)  # ros2 run <패키지명> <실행파일명>
+  rm -rf build install log # 빌드 초기화
+  source /opt/ros/humble/setup.bash   # ROS2 자체 환경 설정
+  source ~/ros2_ws/install/setup.bash # 내 패키지 환경 설정
 
-cd ~/ros2_ws
-colcon build 
- * 특정 패키지 빌드시 colcon build --packages-select control
-source install/setup.bash  ← 꼭 필요!
-ros2 run my_pkg my_node(프로젝트명)
-rm -rf build install log # 빌드 초기화
-#
-source /opt/ros/humble/setup.bash   # ROS2 자체 환경 설정
-source ~/ros2_ws/install/setup.bash # 내 패키지 환경 설정
+# Launch 사용법
+  ros2 launch <패키지명> <launch파일명>
 
 #docker에서 폴더 생성 방법
 cd 해당 폴더로 이동
