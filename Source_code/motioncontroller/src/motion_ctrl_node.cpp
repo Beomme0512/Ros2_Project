@@ -59,6 +59,7 @@ private:
         } else if (current_direction_ == "Down") {
             twist.angular.z -= 0.1;
         }
+        RCLCPP_INFO(this->get_logger(), "Speed & angular: %f, %f", twist.linear.x, twist.angular.z);
 
         cmd_vel_publisher_->publish(twist);
         linear_x_ = twist.linear.x;

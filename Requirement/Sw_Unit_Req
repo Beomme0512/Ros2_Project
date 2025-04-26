@@ -54,9 +54,22 @@ Node Requirement:
  
     상세사양 
         Function_01
+           - Input : Cyc10ms_b
+           - Output : -
+           - Detail : Cyc10ms_b 신호가 활성화시에만 키보드 입력을 받아드린다.
+        Function_02
            - Input : 키보드의 방향키
            - Output : ‘Up’, ‘Down’, ’Right’, ‘Left’
            - Detail : 키보드의 방향키에 따라 ‘Up’, ‘Down’, ’Right’, ‘Left’ 중 하나의 방향을 Publishing 한다.
+        Function_03
+           - Input : -
+           - Output : ‘None’
+           - Detail : 키보드의 입력이 없을시에는 'None'으로 Publishing 한다.
+        Function_04
+           - Input : -
+           - Output : Debug 용 publisher 출력 Display
+           - Detail : Publishing 값을 터미널에 출력해야한다.
+                    
            
     수행주기 : Cyc10ms_b 신호 True시 노드 활성화
     
