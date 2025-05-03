@@ -1,88 +1,116 @@
 #include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/bool.hpp"
-#include "std_msgs/msg/string.hpp"
 #include "geometry_msgs/msg/twist.hpp"
+#include "std_msgs/msg/string.hpp"
+#include "robot_interface/msg/time_cycle.hpp"
+#include <algorithm>  // std::clamp
+
+using std::placeholders::_1;
+using std::chrono::steady_clock;
+using std::chrono::duration_cast;
+using std::chrono::seconds;
+using std::chrono::milliseconds;
 
 class MotionCtrlNode : public rclcpp::Node
 {
 public:
-    MotionCtrlNode() : Node("motion_ctrl_node"),
-                       linear_x_(0.0), angular_z_(0.0),
-                       last_direction_(""), last_update_time_(this->now())
-    {
-        cmd_vel_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
+  MotionCtrlNode()
+  : Node("motion_ctrl_node"), cyc5ms_ready_(false), last_direction_("None")
+  {
+    publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
 
-        direction_subscriber_ = this->create_subscription<std_msgs::msg::String>(
-            "Direction", 10,
-            std::bind(&MotionCtrlNode::direction_callback, this, std::placeholders::_1));
+    time_sub_ = this->create_subscription<robot_interface::msg::TimeCycle>(
+      "TimeCycle", 10, std::bind(&MotionCtrlNode::timeCallback, this, _1));
 
-        cycle_subscriber_ = this->create_subscription<std_msgs::msg::Bool>(
-            "TimeCycle/Cyc5ms_b", 10,
-            std::bind(&MotionCtrlNode::cycle_callback, this, std::placeholders::_1));
+    dir_sub_ = this->create_subscription<std_msgs::msg::String>(
+      "Direction", 10, std::bind(&MotionCtrlNode::dirCallback, this, _1));
 
-        RCLCPP_INFO(this->get_logger(), "MotionCtrlNode started.");
-    }
+    timer_ = this->create_wall_timer(
+      std::chrono::milliseconds(2),
+      std::bind(&MotionCtrlNode::mainLoop, this));
+
+    RCLCPP_INFO(this->get_logger(), "MotionCtrlNode started.");
+  }
 
 private:
-    void direction_callback(const std_msgs::msg::String::SharedPtr msg)
-    {
-        current_direction_ = msg->data;
+  void timeCallback(const robot_interface::msg::TimeCycle::SharedPtr msg)
+  {
+    cyc5ms_ready_ = msg->cyc5ms_b;
+  }
 
-        if (current_direction_ == last_direction_) {
-            auto now = this->now();
-            if ((now - last_update_time_).seconds() >= 3.0) {
-                sustained_direction_ = true;
-            }
-        } else {
-            last_direction_ = current_direction_;
-            last_update_time_ = this->now();
-            sustained_direction_ = false;
+  void dirCallback(const std_msgs::msg::String::SharedPtr msg)
+  {
+    std::string dir = msg->data;
+    if (dir == "Right" || dir == "Left") {
+      if (dir == last_direction_) {
+        // Same direction → check duration
+        auto now = steady_clock::now();
+        auto duration = duration_cast<seconds>(now - last_direction_start_);
+        if (duration.count() >= 3) { // 실제 카운트는 
+          sustained_direction_ = true;
         }
+      } else {
+        last_direction_start_ = steady_clock::now();
+        sustained_direction_ = false;
+      }
+    } else {
+      sustained_direction_ = false;
     }
 
-    void cycle_callback(const std_msgs::msg::Bool::SharedPtr msg)
-    {
-        if (!msg->data || current_direction_.empty())
-            return;
+    last_direction_ = dir;
+    current_direction_ = dir;
+  }
 
-        // 초기화
-        geometry_msgs::msg::Twist twist;
-        twist.linear.x = linear_x_;
-        twist.angular.z = angular_z_;
+  void mainLoop()
+  {
+    if (!cyc5ms_ready_) return;
 
-        if (current_direction_ == "Right") {
-            twist.linear.x += sustained_direction_ ? 0.3 : 0.1;
-        } else if (current_direction_ == "Left") {
-            twist.linear.x -= sustained_direction_ ? 0.3 : 0.1;
-        } else if (current_direction_ == "Up") {
-            twist.angular.z += 0.1;
-        } else if (current_direction_ == "Down") {
-            twist.angular.z -= 0.1;
-        }
-        RCLCPP_INFO(this->get_logger(), "Speed & angular: %f, %f", twist.linear.x, twist.angular.z);
+    geometry_msgs::msg::Twist msg;
 
-        cmd_vel_publisher_->publish(twist);
-        linear_x_ = twist.linear.x;
-        angular_z_ = twist.angular.z;
+    if (current_direction_ == "Up") {
+        angular_z_ += 0.1;
+    } else if (current_direction_ == "Down") {
+        angular_z_-= 0.1;
+    } else if (current_direction_ == "Right") {
+        linear_x_ += 0.1;
+      if (sustained_direction_) linear_x_ += 0.3;
+    } else if (current_direction_ == "Left") {
+        linear_x_ -= 0.1;
+      if (sustained_direction_) linear_x_-= 0.3;
     }
 
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_publisher_;
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr direction_subscriber_;
-    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr cycle_subscriber_;
+    linear_x_ = std::clamp(linear_x_, -3.0, 3.0);
+    angular_z_ = std::clamp(angular_z_, -1.0, 1.0); 
 
-    std::string current_direction_;
-    std::string last_direction_;
-    rclcpp::Time last_update_time_;
-    bool sustained_direction_ = false;
+    msg.linear.x = linear_x_;
+    msg.angular.z = angular_z_;
 
-    double linear_x_;
-    double angular_z_;
+    publisher_->publish(msg);
+    RCLCPP_INFO(this->get_logger(), "Published Twist: linear.x=%.2f angular.z=%.2f",
+                msg.linear.x, msg.angular.z);
+
+    cyc5ms_ready_ = false;
+  }
+
+  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
+  rclcpp::Subscription<robot_interface::msg::TimeCycle>::SharedPtr time_sub_;
+  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr dir_sub_;
+  rclcpp::TimerBase::SharedPtr timer_;
+
+  bool cyc5ms_ready_;
+  std::string current_direction_;
+  std::string last_direction_;
+  steady_clock::time_point last_direction_start_;
+  bool sustained_direction_ = false;
+
+  double linear_x_;
+  double angular_z_;
+
 };
-
-int main(int argc, char *argv[])
+  
+int main(int argc, char * argv[])
 {
-    rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<MotionCtrlNode>());
-    rclcpp::shutdown();
-    return 0;
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared<MotionCtrlNode>());
+  rclcpp::shutdown();
+  return 0;
 }

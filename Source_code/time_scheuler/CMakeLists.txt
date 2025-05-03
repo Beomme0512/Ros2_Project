@@ -10,10 +10,11 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(robot_interface REQUIRED)
 
 # 실행파일 추가
 add_executable(scheduler_node src/scheduler_node.cpp)
-ament_target_dependencies(scheduler_node rclcpp std_msgs)
+ament_target_dependencies(scheduler_node rclcpp robot_interface)
 
 # 설치 대상 지정
 install(TARGETS

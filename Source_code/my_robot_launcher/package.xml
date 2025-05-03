@@ -1,19 +1,19 @@
-<?xml version="1.0"?>
 <package format="3">
   <name>my_robot_launcher</name>
-  <version>0.0.1</version>
-  <description>Launcher package for robot system</description>
-
-  <maintainer email="your_email@example.com">Your Name</maintainer>
+  <version>0.1.0</version>
+  <description>Launch system for robot nodes</description>
+  <maintainer email="you@example.com">Your Name</maintainer>
   <license>Apache-2.0</license>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>ament_python</buildtool_depend>
 
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
+  <exec_depend>time_scheuler</exec_depend>
+  <exec_depend>rx_process</exec_depend>
+  <exec_depend>motioncontroller</exec_depend>
 
   <export>
-    <build_type>ament_python</build_type>
+    <build_type>ament_python</build_type>  <!-- ✅ 핵심 변경 -->
   </export>
 </package>

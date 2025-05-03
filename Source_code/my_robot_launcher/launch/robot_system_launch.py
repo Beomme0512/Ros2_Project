@@ -6,19 +6,16 @@ def generate_launch_description():
         Node(
             package='time_scheuler',
             executable='scheduler_node',
-            name='scheduler_node',
-            output='screen'
+            name='scheduler_node'
         ),
         Node(
             package='rx_process',
             executable='direction_node',
-            name='direction_node',
-            output='screen'
+            name='direction_node'
         ),
         Node(
             package='motioncontroller',
             executable='motion_ctrl_node',
-            name='motion_ctrl_node',
-            output='screen'
+            name='motion_ctrl_node'
         )
     ])

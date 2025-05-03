@@ -14,7 +14,7 @@ Subscriber:
 
 Node Requirement: 
  
-    노드기능 : 5ms 주기로 Timer 생성, 10ms 주기로 Timer를 생성하여, 각 Timer의 신호를 Publishing 한다.
+    노드기능 : 5ms, 20ms, 100ms 주기로 Timer를 생성하여, 각 Timer의 신호를 Publishing 한다.
  
     상세사양 
         Function_01
@@ -23,9 +23,12 @@ Node Requirement:
            - Detail : 5ms 주기로 Timer를 생성하여 Cyc5ms_b를 Publishing 한다.
         Function_02
            - Input : -
-           - Output : Cyc10ms_b
+           - Output : Cyc20ms_b
            - Detail : 10ms 주기로 Timer를 생성하여 Cyc10ms_b를 Publishing 한다.
-
+        Function_03
+           - Input : -
+           - Output : Cyc100ms_b
+           - Detail : 100ms 주기로 Timer를 생성하여 Cyc10ms_b를 Publishing 한다.
     수행주기 : -
     
     설계 언어 : Cpp 
@@ -46,17 +49,17 @@ Publisher:
 Subscriber: 
     Topic Name: TimeCycle
     Message Type: Boolean
-    Message Used Fields: Cyc10ms_b
+    Message Used Fields: Cyc100ms_b
 
 Node Requirement: 
  
-    노드기능 : Cyc10ms_b가 활성화시, 키보드의 방향에 따라 ‘Up’, ‘Down’, ’Right’, ‘Left’ 중 하나의 방향을 Publishing 한다.
+    노드기능 : Cyc100ms_b가 활성화시, 키보드의 방향에 따라 ‘Up’, ‘Down’, ’Right’, ‘Left’ 중 하나의 방향을 Publishing 한다.
  
     상세사양 
         Function_01
-           - Input : Cyc10ms_b
+           - Input : Cyc100ms_b
            - Output : -
-           - Detail : Cyc10ms_b 신호가 활성화시에만 키보드 입력을 받아드린다.
+           - Detail : Cyc100ms_b 신호가 활성화시에만 키보드 입력을 받아드린다.
         Function_02
            - Input : 키보드의 방향키
            - Output : ‘Up’, ‘Down’, ’Right’, ‘Left’
@@ -71,7 +74,7 @@ Node Requirement:
            - Detail : Publishing 값을 터미널에 출력해야한다.
                     
            
-    수행주기 : Cyc10ms_b 신호 True시 노드 활성화
+    수행주기 : Cyc100ms_b 신호 True시 노드 활성화
     
     설계 언어 : Cpp 
 

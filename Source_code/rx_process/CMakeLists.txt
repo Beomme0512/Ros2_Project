@@ -8,9 +8,10 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(robot_interface REQUIRED)
 
 add_executable(direction_node src/direction_node.cpp)
-ament_target_dependencies(direction_node rclcpp std_msgs)
+ament_target_dependencies(direction_node rclcpp std_msgs robot_interface)
 
 install(TARGETS
   direction_node

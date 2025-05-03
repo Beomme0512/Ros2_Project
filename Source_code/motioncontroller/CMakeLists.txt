@@ -8,9 +8,11 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(robot_interface REQUIRED)
 
 add_executable(motion_ctrl_node src/motion_ctrl_node.cpp)
-ament_target_dependencies(motion_ctrl_node rclcpp std_msgs geometry_msgs)
+ament_target_dependencies(motion_ctrl_node
+  rclcpp std_msgs geometry_msgs robot_interface)
 
 install(TARGETS
   motion_ctrl_node
