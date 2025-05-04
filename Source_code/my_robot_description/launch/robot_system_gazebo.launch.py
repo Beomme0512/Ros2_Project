@@ -19,7 +19,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         gazebo_launch,
-        Node(package='Time_Scheuler', executable='scheduler_node', output='screen'),
-        Node(package='Rx_Process', executable='direction_node', output='screen'),
-        Node(package='MotionController', executable='motion_ctrl_node', output='screen'),
+        Node(package='time_scheuler', executable='scheduler_node', output='screen'),
+        Node(package='rx_process', executable='direction_node', output='screen'),
+        Node(package='motioncontroller', executable='motion_ctrl_node', output='screen'),
     ])
