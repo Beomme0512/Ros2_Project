@@ -29,29 +29,4 @@ source install/setup.bash
 echo "🔧 전체 패키지 빌드 중..."
 colcon build
 source install/setup.bash
-
-# === Gazebo 종료 ===
-echo "🛑 실행 중인 Gazebo 종료 중..."
-killall -q -9 gzserver gzclient || echo "✅ 실행 중인 Gazebo 없음"
-
-# === tmux 세션 정리 ===
-if tmux has-session -t $SESSION_NAME 2>/dev/null; then
-  echo "⚠️ 기존 tmux 세션 '$SESSION_NAME' 종료..."
-  tmux kill-session -t $SESSION_NAME
-fi
-
-# === tmux 세션 시작 ===
-echo "🚀 tmux 세션 시작: $SESSION_NAME"
-tmux new-session -d -s $SESSION_NAME
-
-# ▶ 첫 번째 패널: Gazebo Launch
-tmux send-keys -t $SESSION_NAME:0 \
-  "source /opt/ros/humble/setup.bash && cd $WORKSPACE_DIR && source install/setup.bash && ros2 launch $LAUNCH_PACKAGE $LAUNCH_FILE" C-m
-
-# ▶ 두 번째 패널: 방향키 노드 실행
-tmux split-window -v -t $SESSION_NAME
-tmux send-keys -t $SESSION_NAME:0.1 \
-  "source /opt/ros/humble/setup.bash && cd $WORKSPACE_DIR && source install/setup.bash && ros2 run $KEYBOARD_NODE_PKG $KEYBOARD_NODE_EXEC" C-m
-
-# === 세션 전환 ===
-tmux attach-session -t $SESSION_NAME
+# === Gazebo 프로세스 종료 ===
