@@ -12,12 +12,6 @@ LAUNCH_FILE=robot_system_gazebo.launch.py
 KEYBOARD_NODE_PKG=rx_process
 KEYBOARD_NODE_EXEC=direction_node
 
-# === tmux 설치 확인 ===
-if ! command -v tmux &> /dev/null; then
-  echo "❌ tmux가 설치되어 있지 않습니다. 다음 명령어로 설치하세요:"
-  echo "   sudo apt install tmux"
-  exit 1
-fi
 
 # === ROS2 환경 설정 ===
 source /opt/ros/humble/setup.bash
@@ -34,8 +28,3 @@ echo "🔧 전체 패키지 빌드 중..."
 colcon build
 source install/setup.bash
 
-# === tmux 세션 정리 ===
-if tmux has-session -t $SESSION_NAME 2>/dev/null; then
-  echo "⚠️ 기존 tmux 세션 '$SESSION_NAME' 종료 중..."
-  tmux kill-session -t $SESSION_NAME
-fi

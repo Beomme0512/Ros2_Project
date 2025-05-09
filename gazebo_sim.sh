@@ -1,12 +1,18 @@
 
 #!/bin/bash
+# === tmux 설치 확인 ===
+if ! command -v tmux &> /dev/null; then
+  echo "❌ tmux가 설치되어 있지 않습니다. 다음 명령어로 설치하세요:"
+  echo "   sudo apt install tmux"
+  exit 1
+fi
 
 # 사용자 정의 변수들
 SESSION_NAME=my_sim_session
 WORKSPACE_DIR=~/ros2_ws
-LAUNCH_PACKAGE=my_robot_launcher
-LAUNCH_FILE=robot_sim.launch.py
-KEYBOARD_NODE_PKG=keyboard_input
+LAUNCH_PACKAGE=my_robot_description
+LAUNCH_FILE=robot_system_gazebo.launch.py
+KEYBOARD_NODE_PKG=rx_process
 KEYBOARD_NODE_EXEC=direction_node
 
 # === Ctrl+C 시 처리 함수 등록 ===
