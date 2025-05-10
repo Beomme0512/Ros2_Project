@@ -1,11 +1,12 @@
 ------Start of Requirement------
 
-NodeName : SchedulerNode
+NodeName : schedulernode (Package :time_scheduler)
 
 Publisher:
     Topic Name: TimeCycle
     Message Type: Boolean
-    Message Format: Cyc5ms_b , Cyc10ms_b
+    Message Format: array of boolean
+    Message Used Fields: cyc5ms_b , cyc20ms_b , cyc100ms_b, cyc1050ms_b
 
 Subscriber: 
     Topic Name: -
@@ -14,21 +15,31 @@ Subscriber:
 
 Node Requirement: 
  
-    노드기능 : 5ms, 20ms, 100ms 주기로 Timer를 생성하여, 각 Timer의 신호를 Publishing 한다.
+    노드기능 : 5ms, 20ms, 100ms, 1050ms 주기로 Timer를 생성하여, Timer의 신호를 Publishing 한다.
  
     상세사양 
         Function_01
            - Input : -
-           - Output : Cyc5ms_b
+           - Output : cyc5ms_b
            - Detail : 5ms 주기로 Timer를 생성하여 Cyc5ms_b를 Publishing 한다.
+
         Function_02
-           - Input : -
-           - Output : Cyc20ms_b
-           - Detail : 10ms 주기로 Timer를 생성하여 Cyc10ms_b를 Publishing 한다.
+           - Input : cyc5ms_b
+           - Output : cnt20ms, cnt100ms, cnt1050ms
+           - Detail : cyc5ms_b 신호를 수신시, cnt20ms, cnt100ms, cnt1050ms를 증가시킨다.
         Function_03
-           - Input : -
-           - Output : Cyc100ms_b
-           - Detail : 100ms 주기로 Timer를 생성하여 Cyc10ms_b를 Publishing 한다.
+           - Input : cnt20ms
+           - Output : cyc20ms_b
+           - Detail : cnt20ms가 4일 경우, cyc20ms_b를 Publishing 하고 cnt20ms를 초기화 한다.
+        Function_04
+           - Input : cnt100ms
+           - Output : cyc100ms_b
+           - Detail : cnt100ms가 20일 경우, cyc100ms_b를 Publishing 하고 cnt100ms를 초기화 한다.
+        Function_05
+           - Input : cnt1050ms
+           - Output : cyc1050ms_b
+           - Detail : cnt1050ms가 210일 경우, cyc1050ms_b를 Publishing 하고 cnt1050ms를 초기화 한다.
+                   
     수행주기 : -
     
     설계 언어 : Cpp 
@@ -80,6 +91,48 @@ Node Requirement:
 
 ------End of Requirement------
 
+------Start of Requirement------
+
+NodeName : uss_signalnode (Package :Rx_Process)
+
+Publisher:
+    Topic Name: Direction
+    Message Type: String
+    Message Format: ‘Up’, ‘Down’, ’Right’, ‘Left’
+
+Subscriber: 
+    Topic Name: TimeCycle
+    Message Type: Boolean
+    Message Used Fields: Cyc100ms_b
+
+Node Requirement: 
+ 
+    노드기능 : Cyc100ms_b가 활성화시, 키보드의 방향에 따라 ‘Up’, ‘Down’, ’Right’, ‘Left’ 중 하나의 방향을 Publishing 한다.
+ 
+    상세사양 
+        Function_01
+           - Input : Cyc100ms_b
+           - Output : -
+           - Detail : Cyc100ms_b 신호가 활성화시에만 키보드 입력을 받아드린다.
+        Function_02
+           - Input : 키보드의 방향키
+           - Output : ‘Up’, ‘Down’, ’Right’, ‘Left’
+           - Detail : 키보드의 방향키에 따라 ‘Up’, ‘Down’, ’Right’, ‘Left’ 중 하나의 방향을 Publishing 한다.
+        Function_03
+           - Input : -
+           - Output : ‘None’
+           - Detail : 키보드의 입력이 없을시에는 'None'으로 Publishing 한다.
+        Function_04
+           - Input : -
+           - Output : Debug 용 publisher 출력 Display
+           - Detail : Publishing 값을 터미널에 출력해야한다.
+                    
+           
+    수행주기 : Cyc100ms_b 신호 True시 노드 활성화
+    
+    설계 언어 : Cpp 
+
+------End of Requirement------
 
 
 

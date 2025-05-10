@@ -4,7 +4,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='time_scheuler',
+            package='time_scheduler',
             executable='scheduler_node',
             name='scheduler_node'
         ),

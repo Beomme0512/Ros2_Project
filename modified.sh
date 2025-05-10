@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex  # 디버깅 및 에러 발생 시 종료
+#set -ex  # 디버깅 및 에러 발생 시 종료
 
 # === 설정 ===
 SESSION_NAME="ros2_robot"

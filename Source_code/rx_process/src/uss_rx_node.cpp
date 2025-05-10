@@ -16,7 +16,7 @@ public:
       "TimeCycle", 10, std::bind(&UssRxNode::timecycle_callback, this, _1));
 
     laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-      "LaserScan", 10, std::bind(&UssRxNode::laser_callback, this, _1));
+      "/ultrasonic", 10, std::bind(&UssRxNode::laser_callback, this, _1));
 
     // Publisher
     uss_pub_ = this->create_publisher<std_msgs::msg::Float32>("uss_signal", 10);
@@ -42,8 +42,12 @@ private:
 
   void laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   {
+    RCLCPP_INFO(this->get_logger(), "laser_callback triggered");
     if (!msg->ranges.empty()) {
-      latest_range_ = msg->ranges[0];  // Function_02: range 입력
+      latest_range_ = msg->ranges[0];
+      RCLCPP_INFO(this->get_logger(), "raw uss_signal: %.3f", latest_range_);
+    } else {
+      RCLCPP_WARN(this->get_logger(), "LaserScan message has empty ranges.");
     }
   }
 

@@ -161,13 +161,13 @@
           <resolution>0.01</resolution>
         </range>
       </ray>
-
       <plugin name="ultrasonic_plugin" filename="libgazebo_ros_ray_sensor.so">
         <ros>
           <namespace>/</namespace>
+          <remapping>~/out:=ultrasonic</remapping>
         </ros>
-        <topicName>ultrasonic</topicName>
-        <frameName>ultrasonic_link</frameName>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>ultrasonic_link</frame_name> 
       </plugin>
     </sensor>
   </gazebo>

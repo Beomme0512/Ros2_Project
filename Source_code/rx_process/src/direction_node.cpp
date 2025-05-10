@@ -38,6 +38,7 @@ private:
     if (msg->cyc100ms_b) {
       mainLoop();
     }
+
   }
 
   void mainLoop()
@@ -66,12 +67,13 @@ private:
     char c = '\0';
     int bytesWaiting;
     ioctl(0, FIONREAD, &bytesWaiting);
-    if (bytesWaiting > 0) {
+    if (bytesWaiting >= 3) {
       read(0, &c, 1);
       if (c == '\033') {
         char seq[2];
         read(0, &seq[0], 1);
         read(0, &seq[1], 1);
+        tcflush(STDIN_FILENO, TCIFLUSH);
         return seq[1];  // 'A', 'B', 'C', or 'D'
       }
     }

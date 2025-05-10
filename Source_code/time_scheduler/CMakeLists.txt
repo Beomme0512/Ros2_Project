@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(time_scheuler)
+project(time_scheduler)
 
 # C++ 표준 설정
 if(NOT CMAKE_CXX_STANDARD)

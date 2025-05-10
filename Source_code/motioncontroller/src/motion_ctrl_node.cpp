@@ -14,7 +14,7 @@ class MotionCtrlNode : public rclcpp::Node
 {
 public:
   MotionCtrlNode()
-  : Node("motion_ctrl_node"), cyc5ms_ready_(false), last_direction_("None")
+  : Node("motion_ctrl_node"), cyc5ms_ready_(false), cyc1050ms_ready_(false),last_direction_("None")
   {
     publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
 
@@ -35,29 +35,46 @@ private:
   void timeCallback(const robot_interface::msg::TimeCycle::SharedPtr msg)
   {
     cyc5ms_ready_ = msg->cyc5ms_b;
+    cyc1050ms_ready_ = msg->cyc500ms_b;
   }
 
   void dirCallback(const std_msgs::msg::String::SharedPtr msg)
   {
     std::string dir = msg->data;
-    if (dir == "Right" || dir == "Left") {
-      if (dir == last_direction_) {
-        // Same direction → check duration
-        auto now = steady_clock::now();
-        auto duration = duration_cast<seconds>(now - last_direction_start_);
-        if (duration.count() >= 3) { // 실제 카운트는 
-          sustained_direction_ = true;
+    if(dir != "None") {
+      if (dir == "Right" || dir == "Left") {
+        if (dir == last_direction_) {
+          // Same direction → check duration
+          auto now = steady_clock::now();
+          auto duration = duration_cast<seconds>(now - last_direction_start_);
+          if (duration.count() >= 3) { // 실제 카운트는 
+            sustained_direction_ = true;
+          }
+        } else {
+          last_direction_start_ = steady_clock::now();
+          sustained_direction_ = false;
         }
       } else {
-        last_direction_start_ = steady_clock::now();
         sustained_direction_ = false;
       }
-    } else {
-      sustained_direction_ = false;
+
+      if (current_direction_ == "Up") {
+        angular_z_ += 0.1;
+      } else if (current_direction_ == "Down") {
+          angular_z_-= 0.1;
+      } else if (current_direction_ == "Right") {
+          linear_x_ += 0.1;
+        if (sustained_direction_) linear_x_ += 0.3;
+      } else if (current_direction_ == "Left") {
+          linear_x_ -= 0.1;
+        if (sustained_direction_) linear_x_-= 0.3;
+      }
     }
+    
 
     last_direction_ = dir;
     current_direction_ = dir;
+    dir = "None";
   }
 
   void mainLoop()
@@ -65,18 +82,6 @@ private:
     if (!cyc5ms_ready_) return;
 
     geometry_msgs::msg::Twist msg;
-
-    if (current_direction_ == "Up") {
-        angular_z_ += 0.1;
-    } else if (current_direction_ == "Down") {
-        angular_z_-= 0.1;
-    } else if (current_direction_ == "Right") {
-        linear_x_ += 0.1;
-      if (sustained_direction_) linear_x_ += 0.3;
-    } else if (current_direction_ == "Left") {
-        linear_x_ -= 0.1;
-      if (sustained_direction_) linear_x_-= 0.3;
-    }
 
     linear_x_ = std::clamp(linear_x_, -3.0, 3.0);
     angular_z_ = std::clamp(angular_z_, -1.0, 1.0); 
@@ -97,6 +102,8 @@ private:
   rclcpp::TimerBase::SharedPtr timer_;
 
   bool cyc5ms_ready_;
+  bool cyc1050ms_ready_;
+
   std::string current_direction_;
   std::string last_direction_;
   steady_clock::time_point last_direction_start_;
