@@ -51,9 +51,9 @@ private:
 
     publisher_->publish(msg);
     // 디버깅: 모든 주기 상태 한 줄 출력  
-    RCLCPP_INFO(this->get_logger(), 
-     "[TimeCycle] 5ms: %d | 20ms: %d | 100ms: %d | 500ms: %d",
-     msg.cyc5ms_b, msg.cyc20ms_b, msg.cyc100ms_b, msg.cyc500ms_b);
+    // RCLCPP_INFO(this->get_logger(), 
+    //  "[TimeCycle] 5ms: %d | 20ms: %d | 100ms: %d | 500ms: %d",
+    //  msg.cyc5ms_b, msg.cyc20ms_b, msg.cyc100ms_b, msg.cyc500ms_b);
   }
 
   rclcpp::Publisher<TimeCycleMsg>::SharedPtr publisher_;

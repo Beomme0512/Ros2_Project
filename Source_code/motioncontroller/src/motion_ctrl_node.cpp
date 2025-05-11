@@ -1,6 +1,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 #include "std_msgs/msg/string.hpp"
+#include "std_msgs/msg/bool.hpp"
 #include "robot_interface/msg/time_cycle.hpp"
 #include <algorithm>  // std::clamp
 
@@ -9,12 +10,12 @@ using std::chrono::steady_clock;
 using std::chrono::duration_cast;
 using std::chrono::seconds;
 using std::chrono::milliseconds;
-
+using BoolMsg = std_msgs::msg::Bool;
 class MotionCtrlNode : public rclcpp::Node
 {
 public:
   MotionCtrlNode()
-  : Node("motion_ctrl_node"), cyc5ms_ready_(false), cyc1050ms_ready_(false),last_direction_("None")
+  : Node("motion_ctrl_node"), current_dir("None")
   {
     publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
 
@@ -23,64 +24,48 @@ public:
 
     dir_sub_ = this->create_subscription<std_msgs::msg::String>(
       "Direction", 10, std::bind(&MotionCtrlNode::dirCallback, this, _1));
-
-    timer_ = this->create_wall_timer(
-      std::chrono::milliseconds(2),
-      std::bind(&MotionCtrlNode::mainLoop, this));
+     
+    boost_sub_ = this->create_subscription<BoolMsg>(
+      "Spdboost", 10, std::bind(&MotionCtrlNode::boostCallback, this, _1));
 
     RCLCPP_INFO(this->get_logger(), "MotionCtrlNode started.");
   }
 
 private:
+  void dirCallback(const std_msgs::msg::String::SharedPtr msg){
+    current_dir = msg->data;
+  }
+  void boostCallback(const BoolMsg::SharedPtr msg){
+    boost_act_ = msg->data;
+  }
+  
   void timeCallback(const robot_interface::msg::TimeCycle::SharedPtr msg)
   {
-    cyc5ms_ready_ = msg->cyc5ms_b;
-    cyc1050ms_ready_ = msg->cyc500ms_b;
+    if(msg->cyc5ms_b){
+      if(msg->cyc100ms_b)rxsigprocess();
+      mainCtrlLoop();
+    } 
   }
 
-  void dirCallback(const std_msgs::msg::String::SharedPtr msg)
+  void rxsigprocess()
   {
-    std::string dir = msg->data;
-    if(dir != "None") {
-      if (dir == "Right" || dir == "Left") {
-        if (dir == last_direction_) {
-          // Same direction → check duration
-          auto now = steady_clock::now();
-          auto duration = duration_cast<seconds>(now - last_direction_start_);
-          if (duration.count() >= 3) { // 실제 카운트는 
-            sustained_direction_ = true;
-          }
-        } else {
-          last_direction_start_ = steady_clock::now();
-          sustained_direction_ = false;
-        }
-      } else {
-        sustained_direction_ = false;
-      }
-
-      if (current_direction_ == "Up") {
-        angular_z_ += 0.1;
-      } else if (current_direction_ == "Down") {
-          angular_z_-= 0.1;
-      } else if (current_direction_ == "Right") {
-          linear_x_ += 0.1;
-        if (sustained_direction_) linear_x_ += 0.3;
-      } else if (current_direction_ == "Left") {
-          linear_x_ -= 0.1;
-        if (sustained_direction_) linear_x_-= 0.3;
-      }
+    if (current_dir == "Up") {
+      angular_z_ += 0.1;
+    } else if (current_dir == "Down") {
+        angular_z_-= 0.1;
+    } else if (current_dir == "Right") {
+      if (boost_act_)linear_x_ += 0.2; // Boosted speed
+      else linear_x_ += 0.1;
+    } else if (current_dir == "Left") {
+      if (boost_act_)linear_x_ -= 0.2; // Boosted speed
+      else linear_x_ -= 0.1;
     }
-    
-
-    last_direction_ = dir;
-    current_direction_ = dir;
-    dir = "None";
+    previous_dir = current_dir; // Store the last direction
+    current_dir = "None"; // Reset direction after processing
   }
 
-  void mainLoop()
+  void mainCtrlLoop()
   {
-    if (!cyc5ms_ready_) return;
-
     geometry_msgs::msg::Twist msg;
 
     linear_x_ = std::clamp(linear_x_, -3.0, 3.0);
@@ -92,26 +77,22 @@ private:
     publisher_->publish(msg);
     RCLCPP_INFO(this->get_logger(), "Published Twist: linear.x=%.2f angular.z=%.2f",
                 msg.linear.x, msg.angular.z);
-
-    cyc5ms_ready_ = false;
   }
+
+
 
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
   rclcpp::Subscription<robot_interface::msg::TimeCycle>::SharedPtr time_sub_;
   rclcpp::Subscription<std_msgs::msg::String>::SharedPtr dir_sub_;
-  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::Subscription<BoolMsg>::SharedPtr boost_sub_;
 
-  bool cyc5ms_ready_;
-  bool cyc1050ms_ready_;
-
-  std::string current_direction_;
-  std::string last_direction_;
-  steady_clock::time_point last_direction_start_;
-  bool sustained_direction_ = false;
+  std::string current_dir;
+  std::string previous_dir;
+  bool boost_act_;
 
   double linear_x_;
   double angular_z_;
-
+  
 };
   
 int main(int argc, char * argv[])

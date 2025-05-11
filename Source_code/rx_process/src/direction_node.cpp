@@ -1,5 +1,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
+#include "std_msgs/msg/bool.hpp"
 #include "robot_interface/msg/time_cycle.hpp"
 
 #include <termios.h>
@@ -10,6 +11,7 @@
 using std::placeholders::_1;
 using TimeCycleMsg = robot_interface::msg::TimeCycle;
 using StringMsg = std_msgs::msg::String;
+using BoolMsg = std_msgs::msg::Bool;
 
 class DirectionNode : public rclcpp::Node
 {
@@ -18,6 +20,7 @@ public:
   : Node("direction_node")
   {
     publisher_ = this->create_publisher<StringMsg>("Direction", 10);
+    Pub_boost_ = this->create_publisher<BoolMsg>("Spdboost", 10);
 
     subscriber_ = this->create_subscription<TimeCycleMsg>(
       "TimeCycle", 10,
@@ -56,10 +59,32 @@ private:
       }
     }
 
-    auto msg = StringMsg();
-    msg.data = direction;
-    publisher_->publish(msg);
-    RCLCPP_INFO(this->get_logger(), "Published Direction: '%s'", direction.c_str());
+    // boost 감지 로직
+    if (direction != "None") {
+      if (direction == last_direction_) {
+        same_direction_count_++;
+      } else {
+        same_direction_count_ = 1;  // 새로운 방향
+      }
+      last_direction_ = direction;
+    } else {
+      same_direction_count_ = 0;
+    }
+    bool current_boost = same_direction_count_ >= 15;  // 3초 지속시 boost
+
+    if (current_boost != boost_active_) {
+      auto boost_msg = BoolMsg();
+      boost_msg.data = current_boost;
+      Pub_boost_->publish(boost_msg);
+      RCLCPP_INFO(this->get_logger(), "Published Boost: %s", current_boost ? "true" : "false");
+      boost_active_  = current_boost;      
+    }
+    if (direction != "None") {
+      auto msg = StringMsg();
+      msg.data = direction;
+      publisher_->publish(msg);
+      RCLCPP_INFO(this->get_logger(), "Published Direction: '%s'", direction.c_str());
+    }
   }
 
   char getKeyPress()
@@ -96,8 +121,12 @@ private:
 
   rclcpp::Publisher<StringMsg>::SharedPtr publisher_;
   rclcpp::Subscription<TimeCycleMsg>::SharedPtr subscriber_;
+  rclcpp::Publisher<BoolMsg>::SharedPtr Pub_boost_;
   struct termios old_tio_;
-  
+  // 내부 상태
+  std::string last_direction_;
+  int same_direction_count_;
+  bool boost_active_;
 };
 
 int main(int argc, char * argv[])
